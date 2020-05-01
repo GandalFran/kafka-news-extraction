@@ -1,0 +1,56 @@
+{
+  "apps" : [
+    {
+      "name": "tie_kafka_api",
+      "interpreter": "/usr/bin/python3",
+      "script": "api.py",
+      "out_file": "/var/log/tie/tie_kafka_api.log",
+      "error_file": "/var/log/tie/tie_kafka_api.log",
+      "env": {
+        "API_PORT": "20000",
+        "TIE_API_OUTPUT_TOPIC": "tie_crawling_input",
+        "TIE_KAFKA_PRODUCER_SETTINGS": "{ \"group.id\": \"tie\", \"bootstrap.servers\": \"backend.novatrends.me:9092\", \"default.topic.config\": { \"auto.offset.reset\": \"earliest\", \"delivery.timeout.ms\": 30000 } }"
+      }
+    },
+    {
+      "name": "tie_crawling_agent",
+      "interpreter": "/usr/bin/python3",
+      "script": "runCrawlingAgent.py",
+      "out_file": "/var/log/tie/tie_crawling_agent.log",
+      "error_file": "/var/log/tie/tie_crawling_agent.log",
+      "env": {
+        "TIE_CRAWLING_INPUT_TOPIC": "tie_crawling_input",
+        "TIE_CRAWLING_OUTPUT_TOPIC": "tie_scraping_input",
+        "TIE_CRAWLING_API_KEY": "2731f536da454d7a918b9139efa40bb8",
+        "TIE_KAFKA_PRODUCER_SETTINGS": "{ \"group.id\": \"tie\", \"bootstrap.servers\": \"backend.novatrends.me:9092\", \"default.topic.config\": { \"auto.offset.reset\": \"earliest\", \"delivery.timeout.ms\": 30000 } }",
+        "TIE_KAFKA_CONSUMER_SETTINGS": "{ \"group.id\": \"tie\", \"bootstrap.servers\": \"backend.novatrends.me:9092\", \"default.topic.config\": { \"auto.offset.reset\": \"earliest\", \"delivery.timeout.ms\": 30000 } }"
+      }
+    },
+    {
+      "name": "tie_scraping_agent",
+      "interpreter": "/usr/bin/python3",
+      "script": "runScrapingAgent.py",
+      "out_file": "/var/log/tie/tie_scraping_agent.log",
+      "error_file": "/var/log/tie/tie_scraping_agent.log",
+      "env": {
+        "TIE_SCRAPING_INPUT_TOPIC": "tie_scraping_input",
+        "TIE_SCRAPING_OUTPUT_TOPIC": "tie_analysis_input",
+        "TIE_KAFKA_PRODUCER_SETTINGS": "{ \"group.id\": \"tie\", \"bootstrap.servers\": \"backend.novatrends.me:9092\", \"default.topic.config\": { \"auto.offset.reset\": \"earliest\", \"delivery.timeout.ms\": 30000 } }",
+        "TIE_KAFKA_CONSUMER_SETTINGS": "{ \"group.id\": \"tie\", \"bootstrap.servers\": \"backend.novatrends.me:9092\", \"default.topic.config\": { \"auto.offset.reset\": \"earliest\", \"delivery.timeout.ms\": 30000 } }"
+      }
+    },
+    {
+      "name": "tie_analysis_agent",
+      "interpreter": "/usr/bin/python3",
+      "script": "runAnalysisAgent.py",
+      "out_file": "/var/log/tie/tie_analysis_agent.log",
+      "error_file": "/var/log/tie/tie_analysis_agent.log",
+      "env": {
+        "TIE_ANALYSIS_INPUT_TOPIC": "tie_analysis_input",
+        "TIE_ANALYSIS_OUTPUT_TOPIC": "tie_analysis_output",
+        "TIE_KAFKA_PRODUCER_SETTINGS": "{ \"group.id\": \"tie\", \"bootstrap.servers\": \"backend.novatrends.me:9092\", \"default.topic.config\": { \"auto.offset.reset\": \"earliest\", \"delivery.timeout.ms\": 30000 } }",
+        "TIE_KAFKA_CONSUMER_SETTINGS": "{ \"group.id\": \"tie\", \"bootstrap.servers\": \"backend.novatrends.me:9092\", \"default.topic.config\": { \"auto.offset.reset\": \"earliest\", \"delivery.timeout.ms\": 30000 } }"
+      }
+    }
+  ]
+}
