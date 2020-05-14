@@ -24,41 +24,29 @@ RequestID(app)
 
 args_parser = reqparse.RequestParser()
 args_parser.add_argument('q', required=True, type=str, location='form', help='a string with keywords to serach')
-
 @service.route("/kafka")
 class Search(Resource):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.parser = args_parser
         self._producer = kafka.build_producer(KAFKA_PRODUCER_SETTINGS)
 
     @api.doc('Starts a search of news over the internet')
     @api.expect(args_parser)
     @api.response(200, 'Success')
     def post(self):
-        # get query
-        q = self._get_args()
-        # build kafka message
-        message = {
+        q = args_parser.parse_args()['q']
+        kafka.write(self._producer, KAFKA_OUTPUT_TOPIC, json.dumps({
             "request": {
                 "id": request.environ.get("HTTP_X_REQUEST_ID"),
                 "keywords": q
             }
-        }
-        message = json.dumps(message)
-        # send to kafka
-        kafka.write(self._producer, KAFKA_OUTPUT_TOPIC, message)
+        }))
         return {
             "status": "ok",
             "keywords": q,
             "id": request.environ.get("HTTP_X_REQUEST_ID")
         }
-
-    def _get_args(self):
-        args = self.parser.parse_args()
-        q = args['q']
-        return q
 
 
 if __name__ == '__main__':

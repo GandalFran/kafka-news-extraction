@@ -11,12 +11,7 @@ class AnalysisAgent(Agent):
         self._analyzer = SentimentIntensityAnalyzer()
 
     def task(self, message: str) -> List[str]:
-        # get list of articles
         article = json.loads(message)
-
-        # analyze
         article['sentiment'] = self._analyzer.polarity_scores(article['content'])
-
-        # build kafka message
         response = json.dumps(article)
         return [response]

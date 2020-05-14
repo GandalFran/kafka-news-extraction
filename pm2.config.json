@@ -3,7 +3,7 @@
     {
       "name": "tie_kafka_api",
       "interpreter": "/usr/bin/python3",
-      "script": "api.py",
+      "script": "agents/api.py",
       "out_file": "/var/log/tie/tie_kafka_api.log",
       "error_file": "/var/log/tie/tie_kafka_api.log",
       "env": {
@@ -15,7 +15,7 @@
     {
       "name": "tie_crawling_agent",
       "interpreter": "/usr/bin/python3",
-      "script": "runCrawlingAgent.py",
+      "script": "agents/runCrawlingAgent.py",
       "out_file": "/var/log/tie/tie_crawling_agent.log",
       "error_file": "/var/log/tie/tie_crawling_agent.log",
       "env": {
@@ -29,7 +29,7 @@
     {
       "name": "tie_scraping_agent",
       "interpreter": "/usr/bin/python3",
-      "script": "runScrapingAgent.py",
+      "script": "agents/runScrapingAgent.py",
       "out_file": "/var/log/tie/tie_scraping_agent.log",
       "error_file": "/var/log/tie/tie_scraping_agent.log",
       "env": {
@@ -42,7 +42,7 @@
     {
       "name": "tie_analysis_agent",
       "interpreter": "/usr/bin/python3",
-      "script": "runAnalysisAgent.py",
+      "script": "agents/runAnalysisAgent.py",
       "out_file": "/var/log/tie/tie_analysis_agent.log",
       "error_file": "/var/log/tie/tie_analysis_agent.log",
       "env": {
@@ -51,6 +51,18 @@
         "TIE_KAFKA_PRODUCER_SETTINGS": "{ \"group.id\": \"tie\", \"bootstrap.servers\": \"backend.novatrends.me:9092\", \"default.topic.config\": { \"auto.offset.reset\": \"earliest\", \"delivery.timeout.ms\": 30000 } }",
         "TIE_KAFKA_CONSUMER_SETTINGS": "{ \"group.id\": \"tie\", \"bootstrap.servers\": \"backend.novatrends.me:9092\", \"default.topic.config\": { \"auto.offset.reset\": \"earliest\", \"delivery.timeout.ms\": 30000 } }"
       }
+    },
+    {
+      "name": "tie_front_api",
+      "script": "front/api/index.js",
+      "out_file": "/var/log/tie/tie_front_api.log",
+      "error_file": "/var/log/tie/tie_front_api.log",
+    },
+    {
+      "name": "tie_front_web",
+      "script": "front/web/server.js",
+      "out_file": "/var/log/tie/tie_front_web.log",
+      "error_file": "/var/log/tie/tie_front_web.log",
     }
   ]
 }
