@@ -21,7 +21,7 @@
       "env": {
         "TIE_CRAWLING_INPUT_TOPIC": "tie_crawling_input",
         "TIE_CRAWLING_OUTPUT_TOPIC": "tie_scraping_input",
-        "TIE_CRAWLING_API_KEY": "2731f536da454d7a918b9139efa40bb8",
+        "TIE_CRAWLING_API_KEY": "",
         "TIE_KAFKA_PRODUCER_SETTINGS": "{ \"group.id\": \"tie\", \"bootstrap.servers\": \"backend.novatrends.me:9092\", \"default.topic.config\": { \"auto.offset.reset\": \"earliest\", \"delivery.timeout.ms\": 30000 } }",
         "TIE_KAFKA_CONSUMER_SETTINGS": "{ \"group.id\": \"tie\", \"bootstrap.servers\": \"backend.novatrends.me:9092\", \"default.topic.config\": { \"auto.offset.reset\": \"earliest\", \"delivery.timeout.ms\": 30000 } }"
       }
