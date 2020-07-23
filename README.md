@@ -1,4 +1,4 @@
-# Kafka-news-extraction
+# kafka-news-extraction
 
 Implementation of a news items extraction and processing platform using Vue.js, node.js, Python and Apache Kafka for the TIE course of the computer science degree of the USAL.
 
