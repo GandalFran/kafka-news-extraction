@@ -19,7 +19,7 @@ setup(
         'requests==2.21.0',
         'Flask==1.1.1',
         'werkzeug==0.16.1',
-        'flask_cors==3.0.8',
+        'flask_cors==3.0.9',
         'flask_restplus==0.13.0'
     ]
 )
